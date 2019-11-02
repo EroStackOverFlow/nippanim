@@ -1,0 +1,75 @@
+{# src/Triv/AnimesBundle/Resources/views/Animes/form4.html.twig #}
+
+
+
+{# Le formulaire reste inchangé #}
+
+<div class="row">
+   <div class="span2">
+   </div>
+    <div class="span8">
+     <h3>ajouter un episode</h3>
+   </div>
+</div>
+
+<div  class="row">
+  <div class="span2">
+   </div>
+  <div class="well span8"  >
+  {{ form_start(form, {'attr': {'class': 'form-horizontal'}}) }}
+     
+
+    {# Les erreurs générales du formulaire. #}
+    {{ form_errors(form) }}
+
+    <div class="form-group">
+      {{ form_label(form.title, "Titre :", {'label_attr': {'class': 'col-sm-3 control-label'}}) }}
+      {{ form_errors(form.title) }}
+      <div class="col-sm-4">
+        {{ form_widget(form.title, {'attr': {'class': 'form-control'}}) }}
+      </div>
+    </div>
+   
+   <div class="form-group">
+      {{ form_label(form.src, "src :", {'label_attr': {'class': 'col-sm-3 control-label'}}) }}
+      {{ form_errors(form.src) }}
+      <div class="col-sm-4">
+        {{ form_widget(form.src, {'attr': {'class': 'form-control'}}) }}
+      </div>
+    </div>
+  
+  <div class="form-group">
+      {{ form_label(form.epversion, "numero de l'episode et sa version :", {'label_attr': {'class': 'col-sm-3 control-label'}}) }}
+      {{ form_errors(form.epversion) }}
+      <div class="col-sm-4">
+        {{ form_widget(form.epversion, {'attr': {'class': 'form-control'}}) }}
+      </div>
+    </div>
+  
+   
+	
+	
+	
+	   
+	</br>
+	 
+  {# Génération du label + error + widget pour un champ #}
+
+  
+  {# Pour le bouton, pas de label ni d'erreur, on affiche juste le widget #}
+ 
+  {{ form_widget(form.ajouter, {'attr': {'class': ' btn btn-danger'}}) }}
+  {{ form_widget(form.effacer, {'attr': {'class': 'btn btn-default'}}) }}
+  
+  {# Génération automatique des champs pas encore écrits.
+     Dans cet exemple, ce serait le champ CSRF (géré automatiquement par Symfony !)
+     et tous les champs cachés (type « hidden »). #}
+  {{ form_rest(form) }}
+  
+  {# Fermeture de la balise <form> du formulaire HTML #}
+  
+  
+  {{ form_end(form) }}
+ 
+ </div>
+</div>

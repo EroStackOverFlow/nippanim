@@ -1,0 +1,35 @@
+{# src/Triv/AnimesBundle/Resources/views/CritiqueAnimes/add.html.twig #}
+
+{% extends "TrivAnimesBundle::layout.html.twig" %}
+
+
+   
+{% block title %}
+  Ajouter un anime - {{ parent() }}
+{% endblock %}
+
+{% block AllBody %}
+
+   <h2>Ajouter un Critique Mangas</h2>
+  
+ 
+</br></br>
+<div class="row">
+   <div class="span4">
+   </div>
+    <div class="span4">
+	
+   </div>
+</div>
+ {{ include("TrivAnimesBundle:CritiquesAnimes:form.html.twig") }}
+
+  <p>
+    <a href="{{ path('triv_Animes_home') }}" class="btn btn-default">
+      <i class="glyphicon glyphicon-chevron-left"></i>
+      Retour aux Animes
+    </a>
+  </p>
+
+  
+  
+{% endblock %}

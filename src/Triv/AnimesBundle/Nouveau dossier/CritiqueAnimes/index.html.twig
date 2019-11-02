@@ -1,0 +1,90 @@
+   
+{% extends "TrivAnimesBundle::layout.html.twig" %}   
+   
+{% block AllBody %}
+<!--==============================header=================================-->
+      <div class="row">
+         	  <div class="caption span6">
+                </div>                 
+			   <div class="caption span3">
+                   <h3>ANIMES</h3>
+                </div>  
+	 </div>  
+	  {% if is_granted('ROLE_ADMIN') %}
+ <div class="span6"></br> </br>
+	    <a href="{{ path('Triv_Animes_add') }}" class="btn btn-default">
+           <i class="glyphicon glyphicon-edit"></i>
+             ajouter un anime
+          </a>
+		  </div> 
+{% endif %}
+		  
+<section id="content">
+<div class="sub-content">
+  <div class="container">
+          
+    <div class="row">
+      <div class="span12">
+          <h4 class="bot-0">Liste des Animes</h4>
+      </div>
+    </div>
+    <div class="row"> 
+        <div class="thumbnails_3">
+		   {% for anime in listAnime %}	
+            <div class="span4">
+                <div class="thumbnail thumbnail_3">  
+            	<figure><a href="{{ path('Triv_Animes_view', {'id': anime.id}) }}"><img src="{{ asset('uploads/imgAnimes/')}}/{{ anime.image.id }}.{{ anime.image.url }}" alt="{{ anime.image.alt }}"  class="img-radius" style="width: 300px; height: 150px;"></a></figure>
+                <p class="lead p2"><h6>{{ anime.titre }} , ({{ anime.nbEpisodes}})episodes(s) </h6> 
+				<h6> Genre:{{ anime.genre }}</h6>  
+				
+				{{ anime.synopsi }}  				
+				</p>
+                
+				<a href="{{ path('Triv_Animes_view', {'id': anime.id}) }}" class="btn btn_">Visionner</a>
+                </div>
+            </div>   
+        {% else %}
+      <strong><li>Pas (encore !) d'animes</li></strong>
+            
+             {% endfor %}
+	  
+	  
+    	</div>
+    </div>           
+  </div>
+</div>
+</section>
+
+<div class="row">
+   <div class="span2">
+   </div>
+   <div class="span10">
+   <ul class="pagination">
+  {# On utilise la fonction range(a, b) qui crée un tableau de valeurs entre a et b #}
+  {% for p in range(1, nbPages) %}
+    <li{% if p == page %} class="active"{% endif %}>
+      <a href="{{ path('triv_forum_home', {'page': p}) }}">{{ p }}</a>
+    </li>
+  {% endfor %}
+  </ul>
+
+   </div>
+</div>       
+
+ <div class="row">
+      <div class="span8">
+          <h4>LES CRITIQUES MANGAS</h4>
+          <div class="text-block-1">
+              <img src="img/page3-img1.jpg" alt="" class="img-radius" />
+              <div>
+                  <p class="lead p2">Praesent vestibulum molestie lacus. Aenean nonummy hendrerit mauris. Phasellus porta. </p>
+                  Praesent vestibulum molestie lacus. Aenean nonummy hendrerit mauris. Phasellus porta. Fusce suscipit varius mi. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Nulla dui. Fusce feugiat malesuada odio. Morbi nunc odio, gravida at, cursus nec, luctus a, lorem. 
+                    <a href="more.html" class="btn btn_">more info</a>
+                 
+              </div>
+          </div>
+      </div>
+</div>
+
+
+{% endblock %}

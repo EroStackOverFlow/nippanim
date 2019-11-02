@@ -1,0 +1,131 @@
+{# src/Triv/AnimesBundle/Resources/view/Animes/lecture.html.twig #}
+
+{% extends "TrivAnimesBundle::layout.html.twig" %}
+
+{% block title %}
+  Lecture d'un episode - {{ parent() }}
+{% endblock %}
+
+{% block AllBody %}
+</br></br>
+<div class="row">
+   <div class="span2">
+    <h6>LISTE DES EPISODES</h6>
+	</br>
+	<ul >
+    {% for ep in listEpisode %}
+      <li>
+	  <a href="{{ path('Triv_Animes_episode', {'id': anime.id, 'ep': ep.epversion } ) }}" class="btn btn_">
+     episode- {{ep.epversion }}
+	  </a>
+      </li>
+    {% else %}
+      <li>Pas (encore !) d'episode</li>
+    {% endfor %}
+  </ul>
+   </div>
+    <div class="span9">
+	<div class="thumbnail thumbnail_4">  
+      <img src="{{ asset('uploads/imgAnimes/')}}/{{ anime.image.id }}.{{ anime.image.url }}" alt="{{ anime.image.alt }}"  class="img-radius" style="height: 150px; width: 400px;">
+	 </div>
+	  <i> ajoute par:{{ anime.publieur }}, le {{ anime.date|date('d/m/Y') }}</i>
+
+  <div class="well" style="clear: both;">
+   <strong> {{ anime.synopsi }}  </strong>
+  </div>
+
+  
+
+  <p>
+    <a href="{{ path('triv_Animes_home') }}" class="btn btn-default">
+      <i class="glyphicon glyphicon-chevron-left"></i>
+      Retour à la liste
+    </a>
+	 {% if is_granted('ROLE_ADMIN') %}
+    <a href="{{ path('Triv_Animes_edit', {'id': anime.id}) }}" class="btn btn-default">
+      <i class="glyphicon glyphicon-edit"></i>
+      Modifier l'anime
+    </a>
+    <a href="{{ path('Triv_Animes_delete', {'id': anime.id}) }}" class="btn btn-danger">
+      <i class="glyphicon glyphicon-trash"></i>
+      Supprimer l'anime
+    </a>
+	<a href="{{ path('Triv_Episode_add',{'id': anime.id})  }}" class="btn btn-default">
+      <i class="glyphicon glyphicon-edit"></i>
+      ajouter un episode
+    </a>
+	{% endif %}
+  </p>   
+  
+  
+  <p>
+  
+  {{episode.title }}
+  </br>
+  <iframe width="860" height="350" src="{{episode.src }}" frameborder="3" allowfullscreen></iframe>
+  </br>
+  publie par : {{episode.publieur }} 
+    <p>
+	 {% if is_granted('ROLE_ADMIN') %}
+    <a href="{{ path('Triv_Episode_edit', {'id': anime.id, 'ep': episode.epversion}) }}" class="btn btn-default">
+      <i class="glyphicon glyphicon-edit"></i>
+      Modifier l'episode
+    </a>
+    <a href="{{ path('Triv_Episode_delete', {'id': anime.id, 'ep': episode.epversion}) }}" class="btn btn-danger">
+      <i class="glyphicon glyphicon-trash"></i>
+      Supprimer l'episode
+    </a>
+	{% endif %}
+  </p>   
+  
+      
+  </p>
+  <div class="row">
+   <div class="span4">
+   </div>
+    <div class="span4">
+    <p class="btn btn_"> <strong> Commentaires ({{anime.nbCommentaires}})</strong></p>
+	 </div>
+	  </div>
+      <hr>
+       <div class="row">
+        <div class="span3">
+    {% for commentaire in listCommentaires %}
+       par: {{commentaire.author }}  à {{ commentaire.date|date('H/m/s') }}</br>
+	    le {{ commentaire.date|date('d/m/Y') }}</br>
+	   <img src="{{ asset('uploads/imgUser/')}}/{{ commentaire.user.image.id }}.{{ commentaire.user.image.url }}" alt="{{ commentaire.user.image.alt }}"  class="img-radius" style="width: 100px;"></br>
+     {% if is_granted('ROLE_SUPER_ADMIN') %}
+      SUPER ADMIN
+	  {% elseif is_granted('ROLE_ADMIN')%}
+	  ADMINISTRATEUR
+	  {% else %}
+	  MEMBRE
+	  {% endif %}
+  </div>
+    <div class="span6"> 
+		&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+		{{ commentaire.content }}
+		 {% if is_granted('ROLE_ADMIN') %}
+		 </br>		
+		<a href="{{ path('Triv_Animes_comdelete',{'id': commentaire.id})  }}" class="btn btn_">
+     delete
+        </a>
+		{% endif %}		
+      </div>
+	  </div>
+	  <hr>
+    {% else %}
+      <li>Pas (encore !) de Commentaires</li>
+	  </br>
+    {% endfor %}
+	   {{ include("TrivAnimesBundle:Animes:form3.html.twig") }}
+   </div>
+</div>
+
+
+
+     
+      
+	 
+  
+{% endblock %}

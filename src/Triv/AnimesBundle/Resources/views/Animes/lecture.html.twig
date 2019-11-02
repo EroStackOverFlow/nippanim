@@ -1,0 +1,260 @@
+{# src/Triv/AnimesBundle/Resources/view/Animes/lecture.html.twig #}
+
+{% extends "TrivAnimesBundle::layout.html.twig" %}
+
+{% block stylesheets %} 
+{{ parent() }}
+
+ 
+						
+	{% for commentaire in listCommentaires %}
+ 
+						<script type='text/javascript'>
+    $(function(){
+	                
+				 	
+				 var $votecom = $('#votecom');	
+				 
+						
+							
+						$('#votecom1{{commentaire.id}}').click(function(e){	 					
+							  e.preventDefault();		  
+							votecom{{commentaire.id}}(1)
+						});
+						
+						$('#votecom2{{commentaire.id}}').click(function(e){
+							  e.preventDefault();
+							votecom{{commentaire.id}}(-1)
+						});
+						
+						
+						
+							
+							function votecom{{commentaire.id}}(value){
+								
+												$('#load{{commentaire.id}}').show();											
+												$('#btns{{commentaire.id}}').hide();		
+												
+							  
+								  $.post(Routing.generate('Triv_animecom_voteForum',{
+									  ref:     "animecom",
+									  ref_id:  {{commentaire.id}},
+									  vote: value
+								  })).done(function(data, textStatus,jqXHR){
+									  
+									  
+									  $('#comlike_count{{commentaire.id}}').text(data.like_countcom);
+									  $('#comdislike_count{{commentaire.id}}').text(data.dislike_countcom);
+									  
+									  
+									  var ratio = Math.round(100* (parseInt(data.like_countcom)/(parseInt(data.like_countcom) + parseInt(data.dislike_countcom))));
+									  console.log(data);
+								  }).fail(function(jqXHR, texStatus, errorThrown){
+									  alert(jqXHR.responseText);
+									   console.log(jqXHR);
+								  }).always(function(){
+									  
+									  $('#load{{commentaire.id}}').hide();
+									  $('#btns{{commentaire.id}}').fadeIn();		
+									  
+								  });
+								}		  
+						
+							 });
+	   
+            </script>
+		
+ {% endfor %}
+      
+ 
+{% endblock %}
+
+{% block title %}
+  Lecture d'un episode - {{ parent() }}
+{% endblock %}
+
+{% block AllBody %}
+</br></br>
+<div class="row">
+   <div class="span2">
+    <h6>LISTE DES EPISODES</h6>
+	</br>
+
+    {% for ep in listEpisode %}
+      
+	  <a href="{{ path('Triv_Animes_episode', {'id': anime.id, 'ep': ep.epversion } ) }}" class="btn btn_">
+    {% if anime.category == "Anime serie" %}
+     episode- {{episode.epversion }}
+	{% else %}
+	Film - {{episode.epversion }}
+	 {% endif %}
+	  </a>
+      
+    {% else %}
+      Pas (encore !) d'episode
+    {% endfor %}
+  
+   </div>
+    <div class="span9">
+	<div class="thumbnail thumbnail_4">  
+      <img src="{{ asset('uploads/imgAnimes/')}}/{{ anime.image.id }}.{{ anime.image.url }}" alt="{{ anime.image.alt }}"  class="img-radius" style="height: 150px; width: 400px;">
+	 </div>
+	  <i> ajoute par:{{ anime.publieur }}, le {{ anime.date|date('d/m/Y') }}</i>
+
+  <div class="well" style="clear: both;">
+   <strong> {{ anime.synopsi }}  </strong>
+  </div>
+
+  
+<div class="row">
+   <div class="span9">
+          
+    <a href="{{ path('triv_Animes_home') }}" class="btn btn-default">
+      <i class="glyphicon glyphicon-chevron-left"></i>
+      Retour à la liste
+    </a>
+	 {% if is_granted('ROLE_ADMIN') %}
+    <a href="{{ path('Triv_Animes_edit', {'id': anime.id}) }}" class="btn btn-default">
+      <i class="glyphicon glyphicon-edit"></i>
+      Modifier l'anime
+    </a>
+    <a href="{{ path('Triv_Animes_delete', {'id': anime.id}) }}" class="btn btn-danger">
+      <i class="glyphicon glyphicon-trash"></i>
+      Supprimer l'anime
+    </a>
+	<a href="{{ path('Triv_Episode_add',{'id': anime.id})  }}" class="btn btn-default">
+      <i class="glyphicon glyphicon-edit"></i>
+      ajouter un episode
+    </a>
+	{% endif %}
+    
+       <div class="vote {{typ}}"  id="vote"  data-ref = "anime"  data-ref_id = {{anime.id}} data-like_count = {{anime.likeCount}} data-dislike_count = {{anime.dislikeCount}}  >
+  
+           <div class="vote_bar">
+		     <div class="vote_progress" style="width:{{percent}}%;" ></div>
+		   </div>
+		    <div class="vote_loading">
+		     chargement...
+		   </div>
+		  <div class="vote_btns">
+		  <button class="vote_btn vote_like " id="vote1"    ><i class="fa fa-thumbs-o-up" aria-hidden="true" ></i> <span  id="like_count">{{anime.likecount}}</span></button>
+	      <button class="vote_btn vote_dislike " id="vote2" ><i class="fa fa-thumbs-o-down" aria-hidden="true" ></i><span id="dislike_count"> {{anime.dislikecount}}</span></button>			 
+			 
+		  </div>
+	    </div>
+   </div>
+</div>   
+ 
+  
+  <p>
+  
+  {{episode.title }}
+  </br>
+  <iframe width="860" height="350" src="{{episode.src }}" frameborder="3" allowfullscreen></iframe>
+  </br>
+  publie par : {{episode.publieur }} 
+  <div class="row">
+   <div class="span9">
+   
+	 {% if is_granted('ROLE_ADMIN') %}
+    <a href="{{ path('Triv_Episode_edit', {'id': anime.id, 'ep': episode.epversion}) }}" class="btn btn-default">
+      <i class="glyphicon glyphicon-edit"></i>
+      Modifier l'episode
+    </a>
+    <a href="{{ path('Triv_Episode_delete', {'id': anime.id, 'ep': episode.epversion}) }}" class="btn btn-danger">
+      <i class="glyphicon glyphicon-trash"></i>
+      Supprimer l'episode
+    </a>
+	{% endif %}
+    
+     
+	 <div class="vote {{typep}}"  id="voteep"  data-refep = "episode"  data-ref_idep = {{episode.id}}  >
+  
+           <div class="voteep_bar">
+		     <div class="voteep_progress" style="width:{{percentep}}%;" ></div>
+		   </div>
+		    <div class="voteep_loading">
+		     chargement...
+		   </div>
+		  <div class="voteep_btns">
+		  <button class="voteep_btn vote_like " id="voteep1"    ><i class="fa fa-thumbs-o-up" aria-hidden="true" ></i> <span  id="eplike_count">{{episode.likecount}}</span></button>
+	      <button class="voteep_btn vote_dislike " id="voteep2" ><i class="fa fa-thumbs-o-down" aria-hidden="true" ></i><span id="epdislike_count"> {{episode.dislikecount}}</span></button>			 			 
+		  </div>
+	   </div>
+      
+  
+   </div>
+  </div>
+    
+  <div class="row">
+   <div class="span4">
+   </div>
+    <div class="span4">
+    <p class="btn btn_"> <strong> Commentaires ({{anime.nbCommentaires}})</strong></p>
+	 </div>
+	  </div>
+      <hr>
+       
+    {% for commentaire in listCommentaires %}
+		<div class="row">
+          <div class="span2">
+	 <a href="{{ path('fos_user_profile_show', {'id': commentaire.user.id} )}}" > 
+       par: {{commentaire.author }}  à {{ commentaire.date|date('H/m/s') }}</br>
+	    le {{ commentaire.date|date('d/m/Y') }}</br>
+	   <img src="{{ asset('uploads/imgUser/')}}/{{ commentaire.user.image.id }}.{{ commentaire.user.image.url }}" alt="{{ commentaire.user.image.alt }}"  class="img-radius" style="width: 70px; height:70px;"></br>
+    {% if commentaire.user.hasRole('ROLE_SUPER_ADMIN') %}
+      SUPER ADMIN
+	  {% elseif commentaire.user.hasRole('ROLE_AJOUTEUR') %}
+	  AJOUTEUR
+	  {% elseif commentaire.user.hasRole('ROLE_ADMIN') %}
+	  ADMINISTRATEUR
+	  {% else %}
+	  MEMBRE
+	  {% endif %} 
+	  </a>
+  </div>
+    <div class="span6"> 
+		
+		<strong>{{ commentaire.content }}</strong>
+		 {% if is_granted('ROLE_ADMIN') %}
+		 </br>		
+		<a href="{{ path('Triv_Animes_comdelete',{'id': commentaire.id})  }}" class="btn btn_">
+     delete
+        </a>
+		{% endif %}
+    </div>
+    
+        <div class=" votecom "  id="votecom{{commentaire.id}}"  data-refcom = "animecom"  data-ref_idcom{{commentaire.id}} = {{commentaire.id}}>
+		    <div class="votecom_loading" id="load{{commentaire.id}}">
+		     chargement...
+		    </div>
+		  <div class="votecom_btns" id="btns{{commentaire.id}}">
+		   <button class="votecom_btn vote_like " id="votecom1{{commentaire.id}}" ><i class="fa fa-thumbs-o-up" aria-hidden="true" ></i><span  id="comlike_count{{commentaire.id}}"> {{commentaire.likecount}}</span></button>
+		   <button class="votecom_btn vote_dislike " id="votecom2{{commentaire.id}}" ><i class="fa fa-thumbs-o-down" aria-hidden="true" ></i><span  id="comdislike_count{{commentaire.id}}"> {{commentaire.dislikecount}}</span></button>			 			 
+          		 
+		 </div>
+		</div>
+	
+      </div>
+	  
+	  <hr>
+    {% else %}
+      <li>Pas (encore !) de Commentaires</li>
+	  </br>
+    {% endfor %}
+	    {% if is_granted('ROLE_USER') %}
+	   {{ include("TrivAnimesBundle:Animes:form3.html.twig") }}
+	  {% else %}
+	    <h5> CONNECTEZ VOUS POUR LAISSER UN COMMENTAIRE <h5>
+		</br></br></br></br></br></br>
+		{% endif %}		
+   </div>
+</div>
+
+
+
+     
+      
+	 
+  
+{% endblock %}

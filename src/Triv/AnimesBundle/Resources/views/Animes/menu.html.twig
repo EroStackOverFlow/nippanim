@@ -1,0 +1,16 @@
+  {# src/Triv/AnimesBundle/Resources/views/Animes/menu.html.twig #}
+
+  {# Ce template n'hérite de personne, tout comme le template inclus avec {% include %}. #}
+         
+	   	   {% for episode in listEpisode %}
+            
+                    
+					 <img src="{{ asset('uploads/imgAnimes/')}}/{{ episode.anime.image.id }}.{{ episode.anime.image.url }}" alt="{{ episode.anime.image.alt }}"  class="img-radius" style="width: 63px;"> 
+
+					 <a href="{{ path('Triv_Animes_episode', {'id': episode.anime.id ,'ep': episode.epversion }) }}">{{ episode.anime.titre }} - {{ episode.epversion }} - {{ episode.title }}</a> <br />
+                  
+              
+				 {% else %}
+      <strong><li>Pas (encore !) d'epiosdes</li></strong>
+				  {% endfor %}
+	

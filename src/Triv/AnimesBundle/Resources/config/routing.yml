@@ -1,0 +1,97 @@
+# src/Triv/ForumBundle/Resources/config/routing.yml
+
+triv_Animes_home:
+    path:     /{page}
+    defaults: { _controller: TrivAnimesBundle:Animes:index, page: 1 }
+    requirements:
+        page: \d*
+
+Triv_Animes_view:
+    path:      /post/{id}
+    defaults:  { _controller: TrivAnimesBundle:Animes:view }
+    requirements:
+        id: \d+
+
+Triv_Animes_view_slug:
+    path:      /{year}/{slug}.{_format}
+    defaults:  { _controller: TrivAnimesBundle:Animes:viewSlug, _format: html }
+    requirements:
+        year:   \d{4}
+        format: html|xml
+
+Triv_Animes_add:
+    path:      /add
+    defaults:  { _controller: TrivAnimesBundle:Animes:add }
+
+Triv_Animes_edit:
+    path:      /edit/{id}
+    defaults:  { _controller: TrivAnimesBundle:Animes:edit }
+    requirements:
+        id: \d+
+
+Triv_Animes_delete:
+    path:      /delete/{id}
+    defaults:  { _controller: TrivAnimesBundle:Animes:delete }
+    requirements:
+        id: \d+
+Triv_Animes_episode:
+    path:      /post/{id}/{ep}
+    defaults:  { _controller: TrivAnimesBundle:Animes:lecture }
+    requirements:
+        id: \d+
+Triv_Episode_add:
+    path:      /view/{id}/add
+    defaults:  { _controller: TrivAnimesBundle:Animes:episode }
+    requirements:
+        id: \d+
+Triv_Animes_comdelete:
+    path:      /commentairedelete/{id}
+    defaults:  { _controller: TrivAnimesBundle:Animes:comdelete }
+    requirements:
+        id: \d+
+        
+Triv_Episode_delete:
+    path:      /delete/{id}/{ep}
+    defaults:  { _controller: TrivAnimesBundle:Animes:episodedelete }
+    requirements:
+        id: \d+
+Triv_Episode_edit:
+    path:      /edit/{id}/{ep}
+    defaults:  { _controller: TrivAnimesBundle:Animes:episodeedit }
+    requirements:
+        id: \d+
+triv_CritiqueAnimes_home:
+    path:     /critiques_mangas/{page}
+    defaults: { _controller: TrivAnimesBundle:Animes:index1, page: 1 }
+    requirements:
+        page: \d*
+triv_FilmsEtOav_home:
+    path:     /FilmsEtOav/{page}
+    defaults: { _controller: TrivAnimesBundle:Animes:index2, page: 1 }
+    requirements:
+        page: \d*
+triv_AnimeSerie_home:
+    path:     /AnimeSerie/{page}
+    defaults: { _controller: TrivAnimesBundle:Animes:index3, page: 1 }
+    requirements:
+        page: \d*
+triv_Animes_search:
+    path:     /search/{page}
+    defaults: { _controller: TrivAnimesBundle:Animes:searchindex, page: 1 }
+    requirements:
+        page: \d*
+Triv_Animes_voteForum:
+    path:      /post/vote/{ref}/{ref_id}/{vote}
+    defaults:  { _controller: TrivAnimesBundle:Animes:voteanime }
+    options:
+        expose: true
+Triv_animecom_voteForum:
+    path:      /post/vote/com/{ref}/{ref_id}/{vote}
+    defaults:  { _controller: TrivAnimesBundle:Animes:voteanimecom }
+    options:
+        expose: true
+Triv_episodes_voteForum:
+    path:      /post/vote/episode/{ref}/{ref_id}/{vote}
+    defaults:  { _controller: TrivAnimesBundle:Animes:voteepisode }
+    options:
+        expose: true

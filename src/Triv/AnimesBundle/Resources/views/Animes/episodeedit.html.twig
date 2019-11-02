@@ -1,0 +1,26 @@
+{# src/Triv/AnimesBundle/Resources/views/Animes/episodeedit.html.twig #}
+
+{% extends "TrivAnimesBundle::layout.html.twig" %}
+
+{% block title %}
+  Modifier un episode - {{ parent() }}
+{% endblock %}
+
+{% block AllBody %}
+
+  <h2>Modifier un episode</h2>
+
+  {% include "TrivAnimesBundle:Animes:form4.html.twig" %}
+
+  <p>
+    Vous éditez un episode déjà existant, merci de ne pas changer
+    l'esprit générale de l'episode déjà publié.
+  </p>
+
+  <p>
+    <a href="{{ path('Triv_Animes_view', {'id': episode.anime.id}) }}" class="btn btn-default">
+      <i class="glyphicon glyphicon-chevron-left"></i>
+      Retour à l'anime
+  </p>
+
+{% endblock %}

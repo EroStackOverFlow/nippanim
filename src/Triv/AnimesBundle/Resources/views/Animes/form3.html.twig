@@ -1,0 +1,53 @@
+{# src/Triv/AnimesBundle/Resources/views/Animes/form3.html.twig #}
+
+
+
+{# Le formulaire reste inchangé #}
+
+<div class="row">
+   <div class="span9">
+
+  <div class="well"  >
+  {{ form_start(form, {'attr': {'class': 'form-horizontal'}}) }}
+     
+
+    {# Les erreurs générales du formulaire. #}
+    {{ form_errors(form) }}
+
+    <div class="form-group">
+      {{ form_label(form.content, "Commentaire :", {'label_attr': {'class': 'col-sm-3 control-label'}}) }}
+      {{ form_errors(form.content) }}
+      <div class="col-sm-4">
+        {{ form_widget(form.content, {'attr': {'class': 'form-control'}}) }}
+      </div>
+    </div>
+  
+   
+	
+	
+	
+	   
+	</br>
+	 
+  {# Génération du label + error + widget pour un champ #}
+
+  
+  {# Pour le bouton, pas de label ni d'erreur, on affiche juste le widget #}
+ 
+  {{ form_widget(form.Poster, {'attr': {'class': ' btn btn-danger'}}) }}
+  {{ form_widget(form.Effacer, {'attr': {'class': 'btn btn-default'}}) }}
+  
+  {# Génération automatique des champs pas encore écrits.
+     Dans cet exemple, ce serait le champ CSRF (géré automatiquement par Symfony !)
+     et tous les champs cachés (type « hidden »). #}
+  {{ form_rest(form) }}
+  
+  {# Fermeture de la balise <form> du formulaire HTML #}
+  
+  
+  {{ form_end(form) }}
+ 
+ </div>
+
+  </div>
+	  </div>

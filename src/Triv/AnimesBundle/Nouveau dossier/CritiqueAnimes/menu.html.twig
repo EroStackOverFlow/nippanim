@@ -1,0 +1,15 @@
+  {# src/Triv/PlatformBundle/Resources/views/Advert/menu.html.twig #}
+
+  {# Ce template n'hérite de personne, tout comme le template inclus avec {% include %}. #}
+         <div class="row">
+	   	   {% for advert in listAdverts %}
+            	<div class="span4">
+                    <ul class="list">
+					 <li><a href="{{ path('Triv_platform_view', {'id': advert.id}) }}">{{ advert.title }}</a></li>
+                    </ul>
+                </div>
+				 {% else %}
+      <strong><li>Pas (encore !) d'annonces</li></strong>
+				  {% endfor %}
+				  
+		 </div>
