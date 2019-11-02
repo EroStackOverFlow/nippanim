@@ -1,0 +1,48 @@
+triv_news:
+    resource: "@TrivNewsBundle/Resources/config/routing.yml"
+    prefix:   /news
+
+triv_quizz:
+    resource: "@TrivQuizzBundle/Resources/config/routing.yml"
+    prefix:   /quizz
+
+triv_admin:
+    resource: "@TrivAdminBundle/Resources/config/routing.yml"
+    prefix:   /admin
+
+triv_animes:
+    resource: "@TrivAnimesBundle/Resources/config/routing.yml"
+    prefix:   /animes
+
+
+triv_forum:
+    resource: "@TrivForumBundle/Resources/config/routing.yml"
+    prefix:   /forum
+
+
+triv_core:
+    resource: "@TrivCoreBundle/Resources/config/routing.yml"
+    prefix:   /
+
+fos_user_security:
+    resource: "@FOSUserBundle/Resources/config/routing/security.xml"
+
+fos_user_profile:
+    resource: "@FOSUserBundle/Resources/config/routing/profile.xml"
+    prefix: /profile
+
+fos_user_register:
+    resource: "@FOSUserBundle/Resources/config/routing/registration.xml"
+    prefix: /register
+
+fos_user_resetting:
+    resource: "@FOSUserBundle/Resources/config/routing/resetting.xml"
+    prefix: /resetting
+
+fos_user_change_password:
+    resource: "@FOSUserBundle/Resources/config/routing/change_password.xml"
+    prefix: /profile
+fos_js_routing:
+    resource: "@FOSJsRoutingBundle/Resources/config/routing/routing.xml"
+fos_js_routing:
+    routes_to_expose: [ Triv_Forum_voteForum, Triv_Animes_voteForum,Triv_com_voteForum,Triv_episodes_voteForum,]
