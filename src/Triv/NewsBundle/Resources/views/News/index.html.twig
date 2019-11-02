@@ -1,0 +1,44 @@
+
+{% extends "TrivNewsBundle::layout.html.twig" %}   
+   
+   
+ {% block title %}
+  News - {{ parent() }}
+{% endblock %}  
+   
+{% block AllBody %}
+</br></br>
+<div class="row">
+   <div class="span3">
+   
+	 </div>
+    <div class="span6">
+	
+	
+	 <ul class="list-news">
+	      {% for news in listNews %}
+            	<li>
+                	<p class="btn btn_">le:{{news.date|date('d/m/Y')}} à {{news.date|date('H/m/s')}}
+					{% if is_granted('ROLE_ADMIN') %}
+    <a href="{{ path('triv_news_edit', {'id': news.id}) }}" class="btn btn-default">
+      <i class="glyphicon glyphicon-edit"></i>
+      Modifier la nouvelle
+    </a>
+    <a href="{{ path('triv_news_delete', {'id': news.id}) }}" class="btn btn-danger">
+      <i class="glyphicon glyphicon-trash"></i>
+      Supprimer la nouvelle
+    </a>
+	{% endif %}
+					
+					</p>
+					<h3>{{news.titre}}</h3>
+                    <p class="text-info">{{news.content}}</p>
+                </li>
+			{% endfor %}	
+            </ul>
+	
+	
+ </div>
+  </div>
+  <br/><br/><br/>
+{% endblock %}

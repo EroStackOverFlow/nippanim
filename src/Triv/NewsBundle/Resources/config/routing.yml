@@ -1,0 +1,15 @@
+triv_news_index:
+    path:     /
+    defaults: { _controller: TrivNewsBundle:News:index }
+
+triv_news_add:
+    path:     /add
+    defaults: { _controller: TrivNewsBundle:News:add }
+
+triv_news_edit:
+    path:     /edit/{id}
+    defaults: { _controller: TrivNewsBundle:News:edit }
+
+triv_news_delete:
+    path:     /delete/{id}
+    defaults: { _controller: TrivNewsBundle:News:delete }

@@ -1,0 +1,41 @@
+
+{% extends "TrivQuizzBundle::layout.html.twig" %}   
+   
+   
+ {% block title %}
+  Quizz - {{ parent() }}
+{% endblock %}  
+   
+{% block AllBody %}
+</br></br>
+<div class="row">
+   <div class="span5">
+   {% if is_granted('ROLE_AJOUTEUR') %}
+	    <a href="{{ path('triv_quizz_add') }}" class="btn btn-default">
+           <i class="glyphicon glyphicon-edit"></i>
+             ajouter un quizz
+          </a>		
+{% endif %}
+    <h6>LISTE DES QUIZZ</h6>
+
+	 {% for quizz in listQuizz %}
+      
+	  <a href="{{ path('triv_quizz_play', {'name': quizz.name} ) }}" class="btn btn_">
+	  
+     {{quizz.name }} 
+	
+	  </a></br>
+      
+    {% else %}
+      Pas (encore !) de quizz
+    {% endfor %}
+	
+	 </div>
+    <div class="span4">
+	
+	<center><object width=450 height=337><param name=movie value=http://www.quizz.biz/flash/Quizz.swf></param><param name=allowFullScreen value=true></param><param name=allowscriptaccess value=always></param><param name=flashvars value=id={{Quizz.identifiant}}&host=http://www.quizz.biz&f=f&design=|0519F9|505050|0000FF|000000|000000||Trebuchet_MS|14 ></param><embed src={{Quizz.url }}></embed></object><br><font size=1> {{Quizz.auteur}} depuis <a href=http://www.quizz.biz target=_blank>Quizz.biz</a></font><br><br></center>
+ 
+	 
+ </div>
+  </div>
+{% endblock %}

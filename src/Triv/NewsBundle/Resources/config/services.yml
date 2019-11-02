@@ -1,0 +1,4 @@
+services:
+#    triv_news.example:
+#        class: Triv\NewsBundle\Example
+#        arguments: [@service_id, "plain_value", %parameter%]

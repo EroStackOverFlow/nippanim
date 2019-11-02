@@ -1,0 +1,15 @@
+triv_quizz_home:
+    path:     /
+    defaults: { _controller: TrivQuizzBundle:Quizz:index }
+triv_quizz_add:
+    path:      /add
+    defaults:  { _controller: TrivQuizzBundle:Quizz:add }
+triv_quizz_play:
+    path:      /play/{name}
+    defaults:  { _controller: TrivQuizzBundle:Quizz:play }
+triv_quizz_edit:
+    path:      /edit/{id}
+    defaults:  { _controller: TrivQuizzBundle:Quizz:edit }
+triv_quizz_delete:
+    path:      /delete/{id}
+    defaults:  { _controller: TrivQuizzBundle:Quizz:delete }

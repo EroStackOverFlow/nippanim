@@ -1,0 +1,31 @@
+  {# src/Triv/NewsBundle/Resources/views/News/menu.html.twig #}
+
+  {# Ce template n'hérite de personne, tout comme le template inclus avec {% include %}. #}
+         
+	   	   
+            
+                    
+			<ul class="list-news">
+			{% for news in listNews %}
+			
+            	<li>
+				<a href="{{ path('triv_news_index')}}">
+                	<p class="btn btn_">le:{{news.date|date('d/m/Y')}} à {{news.date|date('H/m/s')}}				
+					</p>
+					
+                    <p class="text-info">
+					{{news.titre}}<br/>
+					{{news.content}}
+					</p>
+				</a>	
+                </li>
+               
+            </ul>
+					
+              
+				 {% else %}
+      <strong><li>Pas (encore !) de news</li></strong>
+				  {% endfor %}
+	
+	
+	      

@@ -1,0 +1,26 @@
+{# src/Triv/NewsBundle/Resources/views/News/edit.html.twig #}
+
+{% extends "TrivNewsBundle::layout.html.twig" %}
+
+{% block title %}
+  Modifier une nouvelle - {{ parent() }}
+{% endblock %}
+
+{% block AllBody %}
+
+  <h2>Modifier une nouvelle</h2>
+
+  {% include "TrivNewsBundle:News:form2.html.twig" %}
+
+  <p>
+    Vous éditez une nouvelle déjà existant, merci de ne pas changer
+    l'esprit générale de l'anime déjà publié.
+  </p>
+
+  <p>
+    <a href="{{ path('triv_news_index', {'id': news.id}) }}" class="btn btn-default">
+      <i class="glyphicon glyphicon-chevron-left"></i>
+      Retour aux nouvelles
+  </p>
+
+{% endblock %}

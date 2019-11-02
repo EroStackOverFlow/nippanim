@@ -1,0 +1,66 @@
+{% trans_default_domain 'FOSUserBundle' %}
+
+{% block AllBody %}
+
+<div class="row">
+		     
+        	<div class="span4">
+			</div>
+
+
+        	<div class="span6">
+			
+<div class="fos_user_user_show">
+    </br>
+	<div class="row">
+		     
+        	<div class="span2">
+<p><img src="{{ asset('uploads/imgUser/')}}/{{user.image.id }}.{{user.image.url }}" alt="{{ user.image.alt }}"  class="img-radius" style="width: 200px; height: 200px;"></p>
+			</div>
+        	<div class="span4">
+    
+    <p>
+	
+	{{ 'profile.show.username'|trans }}: {{ user.username }}</br>
+	ROLE:
+	{% if user.hasRole('ROLE_SUPER_ADMIN') %}
+      SUPER ADMIN
+	  {% elseif user.hasRole('ROLE_AJOUTEUR') %}
+	  AJOUTEUR
+	  {% elseif user.hasRole('ROLE_ADMIN') %}
+	  ADMINISTRATEUR
+	  {% else %}
+	  MEMBRE
+	  {% endif %} </br>
+	  Date d'inscription: {{ user.dateIns|date('d/m/Y') }} à {{ user.dateIns|date('H')}}h{{ user.dateIns|date('m')}}min</br>
+    {{ 'profile.show.email'|trans }}: {{ user.email }} </br>
+	Status:
+	{% if user.isAccountNonLocked() %}
+    Actif
+	{% else %}
+	BLOCKE
+	{% endif %}</br>
+	Nombre de Commentaire posté: {{ nbcom }}</br>
+	Derniere connexion: {{ user.lastLogin|date('d/m/Y') }} à {{ user.lastLogin|date('H')}}h{{ user.lastLogin|date('m')}}min</br>
+	{% if  user.id == app.user.id %}
+	  <a href="{{ path('fos_user_profile_edit',{'id': user.id} ) }}" class="btn btn3_"> Editer son profil</a>
+	{% endif %}
+	</p>
+	          </div>
+			  </div>
+			  
+	
+	 
+</div>
+
+
+             
+
+           </div>  
+</div>
+
+</br></br></br></br></br>
+
+        
+
+{% endblock %}

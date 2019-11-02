@@ -1,0 +1,26 @@
+{# src/Triv/QuizzBundle/Resources/views/Quizz/edit.html.twig #}
+
+{% extends "TrivQuizzBundle::layout.html.twig" %}
+
+{% block title %}
+  Modifier un Quizz - {{ parent() }}
+{% endblock %}
+
+{% block AllBody %}
+
+  <h2>Modifier un Quizz</h2>
+
+  {% include "TrivQuizzBundle:Quizz:form2.html.twig" %}
+
+  <p>
+    Vous éditez un Quizz déjà existant, merci de ne pas changer
+    l'esprit générale du Quizz déjà publié.
+  </p>
+
+  <p>
+    <a href="{{ path('triv_quizz_play', {'name': quizz.name}) }}" class="btn btn-default">
+      <i class="glyphicon glyphicon-chevron-left"></i>
+      Retour au quizz
+  </p>
+
+{% endblock %}
