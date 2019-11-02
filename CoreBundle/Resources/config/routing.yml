@@ -1,0 +1,20 @@
+triv_core_homepage:
+    path:     /home
+    defaults: { _controller: TrivCoreBundle:Home:index }
+
+triv_core_homepage1:
+    path:     /
+    defaults: { _controller: TrivCoreBundle:Home:index }
+triv_core_last_post:
+    path:     /home/lastpost
+    defaults: { _controller: TrivForumBundle:Forum:viewLast }
+triv_core_contact:
+    path:     /contact
+    defaults: { _controller: TrivCoreBundle:Home:contact }
+triv_core_contactsend:
+    path:     /contact/send
+    defaults: { _controller: TrivCoreBundle:Home:contactsend }
+triv_core_newsletter:
+    path:     /newsletter
+    defaults: { _controller: TrivCoreBundle:Home:newsletter }
+ 
