@@ -1,0 +1,29 @@
+{# src/Triv/ForumBundle/Resources/views/Forum/edit.html.twig #}
+
+{% extends "TrivForumBundle::layout.html.twig" %}
+
+{% block title %}
+  Modifier un post - {{ parent() }}
+{% endblock %}
+
+{% block AllBody %}
+
+  <h2>Modifier un post</h2>
+
+  <p>
+    Vous éditez un post déjà existant, merci de ne pas changer
+    l'esprit générale du post déjà publié.
+  </p>
+  
+  {% include "TrivForumBundle:Forum:form2.html.twig" %}
+
+  
+
+  <p>
+    <a href="{{ path('Triv_Forum_view', {'id': advert.id}) }}" class="btn btn-default">
+      <i class="glyphicon glyphicon-chevron-left"></i>
+      Retour à l'annonce
+    </a>
+  </p>
+
+{% endblock %}

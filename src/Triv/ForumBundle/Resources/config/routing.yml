@@ -1,0 +1,53 @@
+
+# src/Triv/ForumBundle/Resources/config/routing.yml
+
+triv_forum_home:
+    path:      /{page}
+    defaults:  { _controller: TrivForumBundle:Forum:index, page: 1 }
+    requirements:
+        page: \d*
+
+Triv_Forum_view:
+    path:      /post/{id}
+    defaults:  { _controller: TrivForumBundle:Forum:view }
+    requirements:
+        id: \d+
+
+Triv_forum_view_slug:
+    path:      /{year}/{slug}.{_format}
+    defaults:  { _controller: TrivForumBundle:Forum:viewSlug, _format: html }
+    requirements:
+        year:   \d{4}
+        format: html|xml
+
+Triv_forum_add:
+    path:      /add
+    defaults:  { _controller: TrivForumBundle:Forum:add }
+
+Triv_forum_edit:
+    path:      /edit/{id}
+    defaults:  { _controller: TrivForumBundle:Forum:edit }
+    requirements:
+        id: \d+
+
+Triv_forum_delete:
+    path:      /delete/{id}
+    defaults:  { _controller: TrivForumBundle:Forum:delete }
+    requirements:
+        id: \d+
+Triv_Forum_comdelete:
+    path:      /forumcommentairedelete/{id}
+    defaults:  { _controller: TrivForumBundle:Forum:comdelete }
+    requirements:
+        id: \d+
+Triv_Forum_voteForum:
+    path:      /post/vote/{ref}/{ref_id}/{vote}
+    defaults:  { _controller: TrivForumBundle:Forum:voteforum }
+    options:
+        expose: true
+Triv_com_voteForum:
+    path:      /post/vote/com/{ref}/{ref_id}/{vote}
+    defaults:  { _controller: TrivForumBundle:Forum:votecom }
+    options:
+        expose: true
+

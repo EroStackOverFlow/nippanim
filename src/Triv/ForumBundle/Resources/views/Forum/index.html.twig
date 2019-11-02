@@ -1,0 +1,119 @@
+   
+{% extends "TrivForumBundle::layout.html.twig" %}   
+   
+{% block AllBody %}
+<!--==============================header=================================-->
+      
+<section id="content">
+<div class="sub-content">
+  <div class="container">
+  
+  	<div class="row">
+      <div class="span12">        
+        <ul class="thumbnails indent-3">
+          <li class="span3">
+            <div class="thumbnail thumbnail_1">
+              <div class="caption">
+                <h5>The</h5>
+                <h3>First</h3>
+              </div>  
+              <div class="thumbnail-pad">
+                  <p>  </p>
+                  <a href="#" class="btn btn_">more info</a>
+              </div>
+            </div>
+          </li>
+          <li class="span3">
+            <div class="thumbnail thumbnail_1">
+              <div class="caption">
+                <h5>The</h5>
+                <h3>Second</h3>
+              </div>  
+              <div class="thumbnail-pad">
+                  <p>  </p>
+                  <a href="#" class="btn btn_">more info</a>
+              </div>
+            </div>
+          </li>
+          <li class="span3">
+            <div class="thumbnail thumbnail_1">
+              <div class="caption">
+                <h5>The</h5>
+                <h3>Third</h3>
+              </div>  
+              <div class="thumbnail-pad">
+                  <p> </p>
+                  <a href="#" class="btn btn_">more info</a>
+              </div>
+            </div>
+          </li>
+          <li class="span3">
+            <div class="thumbnail thumbnail_1">
+              <div class="caption">
+                <h5>The</h5>
+                <h3>Fourth</h3>
+              </div>
+              <div class="thumbnail-pad">  
+                  <p> </p>
+                  <a href="#" class="btn btn_">more info</a>
+              </div>
+            </div>
+          </li>
+        </ul>
+      </div>
+    </div>
+	
+    <div class="row">
+      <div class="span10">
+          <h4 class="bot-0">tous les Publications</h4>
+	  </div>
+	  
+		
+	    <div class="span1"></br> </br>
+		 <a href="{{ path('Triv_forum_add') }}" class="btn btn-default" float = right;>
+           <i class="glyphicon glyphicon-edit"></i>
+             Exprimez vous
+          </a>
+		  </div> 
+    </div>
+    <div class="row"> 
+        <div class="thumbnails_3">
+		   {% for advert in listAdverts %}	
+            <div class="span4">
+                <div class="thumbnail thumbnail_3">  
+            	<figure><a href="{{ path('Triv_Forum_view', {'id': advert.id}) }}"><img src="{{ asset('uploads/imgForum/')}}/{{ advert.image.id }}.{{ advert.image.url }}" style="width: 300px; height: 200px;" alt="{{ advert.image.alt }}"  class="img-radius" ></a></figure>
+                <p class="lead p2"> publie par {{ advert.author }} ,({{advert.NbApplications}})coms ,le:({{advert.date|date('d/m/Y')}})</p>
+				<p class="lead p2"> {{ advert.content|truncate(50, true, '...') }}   </p>
+                <p class="lead p2"> j'aime:{{ advert.likecount }}   </p>
+				<a href="{{ path('Triv_Forum_view', {'id': advert.id}) }}" class="btn btn_">commentez</a>
+                </div>
+            </div>   
+        {% else %}
+      <strong><li>Pas (encore !) de post</li></strong>
+            
+             {% endfor %}
+	  
+	  
+    	</div>
+    </div>           
+  </div>
+</div>
+</section>
+
+<div class="row">
+   <div class="span2">
+   </div>
+   <div class="span10">
+   <ul class="pagination">
+  {# On utilise la fonction range(a, b) qui crée un tableau de valeurs entre a et b #}
+  {% for p in range(1, nbPages) %}
+    <li{% if p == page %} class="active"{% endif %}>
+      <a href="{{ path('triv_forum_home', {'page': p}) }}">{{ p }}</a>
+    </li>
+  {% endfor %}
+  </ul>
+
+   </div>
+</div>       
+
+{% endblock %}

@@ -1,0 +1,27 @@
+{# src/Triv/ForumBundle/Resources/views/Forum/comdelete.html.twig #}
+
+{% extends "TrivForumBundle::layout.html.twig" %}
+
+{% block title %}
+  Supprimer un commentaire - {{ parent() }}
+{% endblock %}
+
+{% block AllBody %}
+</br></br>
+  <h2>Supprimer un commentaire</h2>
+
+  <p>
+    Etes-vous certain de vouloir supprimer le commentaire" ?
+  </p>
+  
+  {# On met l'id du commentaire dans la route de l'action du formulaire #}
+	<form action="{{ path('Triv_Forum_comdelete', {'id': commentaire.id}) }}" method="post">
+	<a href="{{ path('Triv_Forum_view', {'id': commentaire.forum.id}) }}" class="btn btn-default">
+	<i class="glyphicon glyphicon-chevron-left"></i>Retour au post</a>
+
+	{# Ici j'ai écrit le bouton de soumission à la main #}
+	<input type="submit" value="Supprimer" class="btn btn-danger" />
+	
+	</form> 
+  
+{% endblock %}

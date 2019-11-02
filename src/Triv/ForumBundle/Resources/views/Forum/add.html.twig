@@ -1,0 +1,29 @@
+{# src/Triv/ForumBundle/Resources/views/Advert/add.html.twig #}
+
+{% extends "TrivForumBundle::layout.html.twig" %}
+
+
+   
+{% block title %}
+  Ajouter une annonce - {{ parent() }}
+{% endblock %}
+
+{% block AllBody %}
+
+   <h2>Ajouter un Post</h2>
+  
+ 
+</br></br>
+
+ {{ include("TrivForumBundle:Forum:form.html.twig") }}
+
+  <p>
+    <a href="{{ path('triv_forum_home') }}" class="btn btn-default">
+      <i class="glyphicon glyphicon-chevron-left"></i>
+      Retour au forum
+    </a>
+  </p>
+
+  
+  
+{% endblock %}

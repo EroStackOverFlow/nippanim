@@ -1,0 +1,1 @@
+<?php// src/Triv/ForumBundle/Controller/Vote.phpnamespace Triv\ForumBundle\Controller;  class Vote{	  	  public function like($ref,$ref_id,$user_id){		  		  	  }	  	    public function dislike($ref,$ref_id,$user_id){		  		  	  }	  	  	  	    }

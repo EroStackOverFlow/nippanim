@@ -1,0 +1,206 @@
+
+{# src/Triv/ForumBundle/Resources/view/Forum/view.html.twig #}
+
+{% extends "TrivForumBundle::layout.html.twig" %}
+{% block stylesheets %} 
+{{ parent() }}
+
+ 
+						
+	{% for application in listApplications %}
+ 
+						<script type='text/javascript'>
+    $(function(){
+	                
+				 	
+				 var $votecom = $('#votecom');	
+				 
+						
+							
+						$('#votecom1{{application.id}}').click(function(e){	 					
+							  e.preventDefault();		  
+							votecom{{application.id}}(1)
+						});
+						
+						$('#votecom2{{application.id}}').click(function(e){
+							  e.preventDefault();
+							votecom{{application.id}}(-1)
+						});
+						
+						
+						
+							
+							function votecom{{application.id}}(value){
+								
+												$('#load{{application.id}}').show();											
+												$('#btns{{application.id}}').hide();		
+												
+							  
+								  $.post(Routing.generate('Triv_com_voteForum',{
+									  ref:     "com",
+									  ref_id:  {{application.id}},
+									  vote: value
+								  })).done(function(data, textStatus,jqXHR){
+									  
+									  
+									  $('#comlike_count{{application.id}}').text(data.like_countcom);
+									  $('#comdislike_count{{application.id}}').text(data.dislike_countcom);
+									  
+									  
+									  var ratio = Math.round(100* (parseInt(data.like_countcom)/(parseInt(data.like_countcom) + parseInt(data.dislike_countcom))));
+									  console.log(data);
+								  }).fail(function(jqXHR, texStatus, errorThrown){
+									  alert(jqXHR.responseText);
+									   console.log(jqXHR);
+								  }).always(function(){
+									  
+									  $('#load{{application.id}}').hide();
+									  $('#btns{{application.id}}').fadeIn();		
+									  
+								  });
+								}		  
+						
+							 });
+	   
+            </script>
+		
+ {% endfor %}
+      
+ 
+{% endblock %}
+
+{% block title %}
+  Lecture d'un post - {{ parent() }}
+{% endblock %}
+
+{% block AllBody %}
+
+</br></br>
+<div class="row">
+   <div class="span2">
+   </div>
+    <div class="span9">
+	 <div class="thumbnail thumbnail_4">  
+      <img src="{{ asset('uploads/imgForum/')}}/{{ advert.image.id }}.{{ advert.image.url }}" alt="{{ advert.image.alt }}"  class="img-radius" style="height: 300px;">
+	 </div>
+	 
+	 <i>Par {{ advert.author }}, le {{ advert.date|date('d/m/Y') }}</i>
+
+  <div class="well" style="clear: both;">
+   <strong> {{ advert.content }}  </strong>
+  </div>
+
+  <div class="row">
+    <div class="span9">
+
+ 
+    <a href="{{ path('triv_forum_home') }}" class="btn btn-default">
+      <i class="glyphicon glyphicon-chevron-left"></i>
+      Retour à la liste
+    </a>
+	
+	
+	 {% if user_id == advert.user.id or is_granted('ROLE_ADMIN') %}
+	
+   
+	<a href="{{ path('Triv_forum_edit', {'id': advert.id}) }}" class="btn btn-default">
+      <i class="glyphicon glyphicon-edit"></i>
+      Modifier le post
+    </a>
+   
+	<a href="{{ path('Triv_forum_delete', {'id': advert.id}) }}" class="btn btn-danger">
+      <i class="glyphicon glyphicon-trash"></i>
+      Supprimer le post
+    </a>
+	{% endif %}
+ 
+
+      
+	   <div class=" vote {{typ}}"  id="vote"  data-ref = "forum"  data-ref_id = {{advert.id}} data-like_count = {{advert.likeCount}} data-dislike_count = {{advert.dislikeCount}}  >
+  
+           <div class="vote_bar">
+		     <div class="vote_progress" style="width:{{percent}}%;" ></div>
+		   </div>
+		    <div class="vote_loading">
+		     chargement...
+		    </div>
+		  <div class="vote_btns">
+		  <button class="vote_btn vote_like " id="vote1"    ><i class="fa fa-thumbs-o-up" aria-hidden="true" ></i> <span  id="like_count">{{advert.likecount}}</span></button>
+	      <button class="vote_btn vote_dislike " id="vote2" ><i class="fa fa-thumbs-o-down" aria-hidden="true" ></i><span id="dislike_count"> {{advert.dislikecount}}</span></button>			 			 
+		  </div>
+		</div>
+	  </div>
+  
+  </div>
+    
+  
+     <div class="row">
+   <div class="span4">
+   </div>
+    <div class="span4">
+	 <p class="btn btn_"> <strong> Commentaires ({{advert.NbApplications}})</strong></p>
+	 </div>
+	  </div>
+      <hr>
+	   
+    {% for application in listApplications %}
+	  
+	<div class="row">
+         <div class="span2">
+      <a href="{{ path('fos_user_profile_show', {'id': application.user.id} )}}" > 
+      par {{ application.author }}  à {{ application.date|date('H:m:s') }}</br>
+        le {{ application.date|date('d/m/Y') }}</br>
+    <img src="{{ asset('uploads/imgUser/')}}/{{ application.user.image.id }}.{{ application.user.image.url }}" alt="{{ application.user.image.alt }}"  class="img-radius" style="width: 70px; height: 70px;"></br>
+     {% if application.user.hasRole('ROLE_SUPER_ADMIN') %}
+      SUPER ADMIN
+	  {% elseif application.user.hasRole('ROLE_AJOUTEUR') %}
+	  AJOUTEUR
+	  {% elseif application.user.hasRole('ROLE_ADMIN') %}
+	  ADMINISTRATEUR
+	  {% else %}
+	  MEMBRE
+	  {% endif %} 
+	  </a>
+  </div>
+    <div class="span6">
+      
+		{{ application.content }}
+		 {% if is_granted('ROLE_ADMIN') %}
+		 </br>		
+		<a href="{{ path('Triv_Forum_comdelete',{'id': application.id})  }}" class="btn btn_">
+     delete
+        </a>
+		{% endif %}
+		</div>
+		
+		<div class=" votecom {{ render(controller("TrivForumBundle:Forum:class", {'id': application.id})) }}"  id="votecom{{application.id}}"  data-refcom = "com"  data-ref_idcom{{application.id}} = {{application.id}}>
+		    <div class="votecom_loading" id="load{{application.id}}">
+		     chargement...
+		    </div>
+		  <div class="votecom_btns" id="btns{{application.id}}">
+		   <button class="votecom_btn vote_like " id="votecom1{{application.id}}" ><i class="fa fa-thumbs-o-up" aria-hidden="true" ></i><span  id="comlike_count{{application.id}}"> {{application.likecount}}</span></button>
+		   <button class="votecom_btn vote_dislike " id="votecom2{{application.id}}" ><i class="fa fa-thumbs-o-down" aria-hidden="true" ></i><span  id="comdislike_count{{application.id}}"> {{application.dislikecount}}</span></button>			 			 
+          		 
+		 </div>
+		</div>
+		
+      </div>
+	  
+	  <hr>
+    {% else %}
+      <i>Pas (encore !) de Commentaires</i>
+    {% endfor %}
+
+	  {% if is_granted('ROLE_USER') %}
+	   {{ include("TrivForumBundle:Forum:form3.html.twig") }}
+	  {% else %}
+	    <h5> CONNECTEZ VOUS POUR LAISSER UN COMMENTAIRE <h5>
+		</br></br></br></br></br></br>
+		{% endif %}		
+   </div>
+</div>
+    
+
+	 
+{% endblock %}
+ 

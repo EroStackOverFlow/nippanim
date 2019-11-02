@@ -1,0 +1,16 @@
+  {# src/Triv/ForumBundle/Resources/views/Forum/menu.html.twig #}
+
+  {# Ce template n'hérite de personne, tout comme le template inclus avec {% include %}. #}
+         
+	   	   {% for forum in listAdverts %}
+            
+                    
+					 <img src="{{ asset('uploads/imgForum/')}}/{{ forum.image.id }}.{{ forum.image.url }}" alt="{{ forum.image.alt }}"  class="img-radius" style="width: 63px;"> 
+
+					 <a href="{{ path('Triv_Forum_view', {'id': forum.id}) }}">{{ forum.content|truncate(20, true, '...') }}</a> <br /><br />
+                  
+              
+				 {% else %}
+      <strong><li>Pas (encore !) d'epiosdes</li></strong>
+				  {% endfor %}
+	
