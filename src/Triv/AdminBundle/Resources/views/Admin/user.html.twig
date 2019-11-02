@@ -1,0 +1,107 @@
+{# src/Triv/AdminBundle/Resources/views/Advert/user.html.twig #}
+
+{% extends "TrivAdminBundle::layout.html.twig" %}
+
+
+   
+{% block title %}
+ LIste des utilisateurs - {{ parent() }}
+{% endblock %}
+
+{% block AllBody %}
+
+   <h2>LIste des utilisateurs</h2>
+  
+</br></br>
+<div class="row">
+   <div class="span1">
+  
+	</div>
+    <div class="span1">
+	 <h6>pp</h6>
+   </div>
+   <div class="span1">
+   <h6>Noms</h6>
+   </div>
+   <div class="span2">
+   <h6>e-mail</h6>
+   </div>
+    <div class="span1">
+   <h6>Role</h6>
+   </div>
+   <div class="span1">
+   <h6>Etat</h6>
+   </div>
+</div>
+{% for user in userlist %}
+<div class="row">
+   <div class="span1">
+  
+	</div>
+    <div class="span1">
+	 <img src="{{ asset('uploads/imgUser/')}}/{{user.image.id }}.{{ user.image.url }}" alt="{{ user.image.alt }}"  class="img-radius" style="width: 30px;">	
+   </div>
+   <div class="span1">
+   <a href="{{ path('fos_user_profile_show', {'id': user.id} )}}" >   {{user.username }} </a>
+   </div>
+   <div class="span2">
+   {{user.email }}
+   </div>
+   <div class="span1">
+   
+   {% if user.hasRole('ROLE_SUPER_ADMIN') %}
+      SUPER ADMIN
+	  {% elseif user.hasRole('ROLE_AJOUTEUR') %}
+	  AJOUTEUR
+	  {% elseif user.hasRole('ROLE_ADMIN') %}
+	  ADMIN
+	  {% else %}
+	  MEMBRE
+	  {% endif %} 
+   </div>
+   <div class="span1">
+   {% if user.isAccountNonLocked() %}
+    Actif
+	{% else %}
+	BLOCKE
+	{% endif %}
+	</div>
+    <div class="span6">
+	{% if is_granted('ROLE_SUPER_ADMIN') %}
+    <a href="{{ path('triv_admin_user_promote', {'id': user.id, 'role': 'admin'}) }}" class="btn btn-default">
+      <i class="glyphicon glyphicon-edit"></i>
+     promote Admin
+    </a>
+	<a href="{{ path('triv_admin_user_promote', {'id': user.id, 'role': 'ajouteur'}) }}" class="btn btn-default">
+      <i class="glyphicon glyphicon-edit"></i>
+     promote Ajouteur
+    </a>
+	<a href="{{ path('triv_admin_user_promote', {'id': user.id, 'role': 'user'}) }}" class="btn btn-default">
+      <i class="glyphicon glyphicon-edit"></i>
+     retro user
+    </a>
+	<a href="{{ path('triv_admin_user_delete', {'id': user.id}) }}" class="btn btn-danger">
+      <i class="glyphicon glyphicon-edit"></i>
+     delete user
+    </a>
+	<a href="{{ path('triv_admin_user_desactive', {'id': user.id}) }}" class="btn btn-danger">
+      <i class="glyphicon glyphicon-edit"></i>
+     desactiver user
+    </a>
+	{% endif %} 
+   </div>
+     
+</div>
+
+ {% endfor %}
+</br>
+  <p>
+    <a href="{{ path('triv_admin_home') }}" class="btn btn-default">
+      <i class="glyphicon glyphicon-chevron-left"></i>
+      Retour au panel d'admin
+    </a>
+  </p>
+
+  
+  
+{% endblock %}

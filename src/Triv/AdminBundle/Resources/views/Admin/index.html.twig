@@ -1,0 +1,100 @@
+
+{% extends "TrivAdminBundle::layout.html.twig" %}   
+
+{% block AllBody %}
+<!--==============================header=================================-->
+      <div class="row">
+         	  <div class="caption span6">
+                </div>                 
+			   <div class="caption span6">
+                   <h3>All Bundles</h3>
+                </div>  
+	 </div>  		   
+<section id="content">
+<div class="sub-content">
+  <div class="container">
+  	<div class="row">
+      <div class="span12">        
+        <ul class="thumbnails indent-3">
+          <li class="span2">
+		  <a href="{{ path('triv_Animes_home') }}" >
+            <div class="thumbnail thumbnail_1">
+              <div class="caption">
+                <h3>Animes</h3>
+              </div>  
+			  </a>
+              <div class="thumbnail-pad">
+                  <p>  </p>
+                  <a href="{{ path('triv_Animes_home') }}" class="btn btn_">more info</a>
+              </div>
+            </div>
+          </li>
+          <li class="span2">
+		   <a href="{{ path('triv_admin_user') }}">
+            <div class="thumbnail thumbnail_1">
+              <div class="caption">
+             
+                <h3>USER</h3>
+              </div>  
+			  </a>
+              <div class="thumbnail-pad">
+                  <p>  </p>
+                  <a href="{{ path('triv_admin_user') }}" class="btn btn_">more info</a>
+              </div>
+            </div>
+          </li>
+          <li class="span2">
+		  <a href="{{ path('triv_forum_home') }}">
+            <div class="thumbnail thumbnail_1">
+              <div class="caption">
+             <h3>forum</h3> 
+              </div>  
+			</a>  
+              <div class="thumbnail-pad">
+                  <p> </p>
+                  <a href="{{ path('triv_forum_home') }}" class="btn btn_">more info</a>
+              </div>
+            </div>
+          </li>
+          <li class="span2">
+		  <a href="{{ path('triv_quizz_home') }}">
+            <div class="thumbnail thumbnail_1">
+              <div class="caption">
+                <h3>QUIZZ</h3>
+              </div>
+			  </a>
+              <div class="thumbnail-pad">  
+                  <p> </p>
+                  <a href="{{ path('triv_quizz_home') }}" class="btn btn_">more info</a>
+              </div>
+            </div>
+          </li>
+		  <li class="span2">
+            <div class="thumbnail thumbnail_1">
+              <div class="caption">
+                <h3>NEWS</h3>
+              </div>
+              <div class="thumbnail-pad">  
+                  <p> </p>
+                  <a href="{{ path('triv_news_add') }}" class="btn btn_">ajouter</a>
+              </div>
+            </div>
+          </li>
+		  <li class="span2">
+            <div class="thumbnail thumbnail_1">
+			<a href="{{ path('triv_admin_letter') }}">
+              <div class="caption">
+                <h3>NEWSLETTER</h3>
+              </div>
+			 </a> 
+              <div class="thumbnail-pad">  
+                  <p> </p>
+                  <a href="{{ path('triv_admin_letter') }}" class="btn btn_">voir</a>
+              </div>
+            </div>
+          </li>
+        </ul>
+      </div>
+    </div>
+   </br> </br>
+{% endblock %}

@@ -1,0 +1,36 @@
+{# src/Triv/AdminBundle/Resources/views/Advert/user.html.twig #}
+
+{% extends "TrivAdminBundle::layout.html.twig" %}
+
+
+   
+{% block title %}
+ LIste des Email - {{ parent() }}
+{% endblock %}
+
+{% block AllBody %}
+
+   <h2>LIste des email des abonnes au newsletter</h2>
+  
+</br></br>
+<div class="row">
+   <div class="span4">
+   </div>
+    <div class="span3">
+	{% for mail in listMail %}
+	 <h6>{{mail.email}}</h6>
+    {% endfor %} 
+ </div>
+</div>   
+ 
+</br>
+  <p>
+    <a href="{{ path('triv_admin_home') }}" class="btn btn-default">
+      <i class="glyphicon glyphicon-chevron-left"></i>
+      Retour au panel d'admin
+    </a>
+  </p>
+
+  
+  
+{% endblock %}

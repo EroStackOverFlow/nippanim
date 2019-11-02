@@ -1,0 +1,21 @@
+# src/Triv/AdminBundle/Resources/config/routing.yml
+
+triv_admin_home:
+    path:     /
+    defaults: { _controller: TrivAdminBundle:Admin:index }
+triv_admin_user:
+    path:     /userListe
+    defaults: { _controller: TrivAdminBundle:Admin:user }
+triv_admin_letter:
+    path:     /newsletter
+    defaults: { _controller: TrivAdminBundle:Admin:letter }
+triv_admin_user_promote:
+    path:     /promote/{id}/{role}
+    defaults: { _controller: TrivAdminBundle:Admin:promote }
+triv_admin_user_delete:
+    path:     /delete/{id}
+    defaults: { _controller: TrivAdminBundle:Admin:delete }
+triv_admin_user_desactive:
+    path:     /desactive/{id}
+    defaults: { _controller: TrivAdminBundle:Admin:desactive }
+

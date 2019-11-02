@@ -1,0 +1,4 @@
+services:
+#    triv_admin.example:
+#        class: Triv\AdminBundle\Example
+#        arguments: [@service_id, "plain_value", %parameter%]
