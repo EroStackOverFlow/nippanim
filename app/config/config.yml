@@ -75,7 +75,7 @@ swiftmailer:
     auth_mode:  login
     host:       smtp.gmail.com
     username:   trivialnippanim
-    password:   Mugiwara7
+    password:   *****
     spool:     { type: memory }
 
 services:
